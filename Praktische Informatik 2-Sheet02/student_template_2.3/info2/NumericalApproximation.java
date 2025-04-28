@@ -20,14 +20,13 @@ public class NumericalApproximation {
 		double result = 0.0;
 
 		// Calculate the area of each trapezoid and sum them up
-		for (int i = 0; i < n; i++) {
+		for (int i = 1; i < n; i++) {
 			double xi = a + i * height;
 			sum += f(xi);
 		}
 
 		sum = (height / 2.0) * (f(a) + 2.0 * sum + f(b));
 		return sum;
-
 	}
 
 	//Approximates the integral of f(x) = 1/(1+x^2) from a to b using Simpson's Rule
