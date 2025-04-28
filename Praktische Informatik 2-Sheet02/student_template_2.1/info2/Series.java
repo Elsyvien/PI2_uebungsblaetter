@@ -8,11 +8,12 @@ public class Series {
 		for(int i = 0; i < n; i++) { // Reihen
 			for(int j = 0; j < n; j++) { // Spalte
 				if((i + j) % 2 == 0) { // gerade Summe
-					System.out.print("1" + "\n");
+					System.out.print("1 " );
 				} else { // ungerade Summe
-					System.out.print("0" + "\n");
+					System.out.print("0 ");
 				}
 			}
+			System.out.println(); // Zeilenumbruch
 		}
 	}
 
@@ -33,7 +34,7 @@ public class Series {
 
 	public static double e(int n) {
 		double result = 1;
-		for(int i = 0; i < n; i++) {
+		for(int i = 1; i <= n; i++) {
 			result += 1.0 / factorial(i);
 		}
 		return result;
@@ -56,32 +57,34 @@ public class Series {
 	// 1.4 d)
 	public static double leibnizSeries(int n) {
 		double res = 0;
-		for(int i = 0; i < n; i++) {
-			if(i % 2 == 0) { // gerade Zahl
-				res += 1.0 / (2 * i + 1); // gerade Zähler
-			} else { // ungerade Zahl
-				res -= 1.0 / (2 * i + 1); // ungerade Zähler
-			}
+
+		for (int k = 0; k <= n; k++) {
+			double vorzeichen = (k % 2 == 0) ? 1.0 : -1.0;   // (-1)^k
+			double nenner     = 2.0 * k + 1.0;               // 2k + 1
+			res += vorzeichen / nenner;
 		}
-		return 4 * res;
+		return 4.0 * res;
 	}
+
 
 	// Exercise Task
 	// 1.5 e)
 	public static String primeFactorization(int n) {
 
-		String result = "";
+		StringBuilder result = new StringBuilder(); // Kannte die Funktion noch aus der Schule wusste keine andere möglichkeit für den output
 		int i = 2;
 		while(n > 1) {
 			if(n % i == 0) { // i ist ein Teiler von n
-				result += i + " "; // Teiler zu Ergebnis hinzufügen
+				result.append(i).append(", "); // Teiler zu Ergebnis hinzufügen
 				n /= i;
 			} else {
 				i++; // nächster Teiler
 			}
 		}
-
-		return result;
+		if (result.length() > 0) {
+			result.setLength(result.length() - 2); // letztes Komma und Leerzeichen entfernen
+		}
+		return result.toString();
 	}
 
 

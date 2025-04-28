@@ -58,3 +58,6 @@ Thumbs.db
 
 # PDF
 *.pdf
+
+# Zip for Uploading to grading Site
+*.zip
