@@ -10,10 +10,23 @@ public class NumericalApproximation {
 
 	// Approximate the integral of f(x) = 1/(1+x^2) from a to b using the Trapezoidal Rule
 	public static double trapezoidalRule(double a, double b, int n) {
-		
-		// TODO: fill me
+		if(n < 1) {
+			System.out.println("n must be greater than 0");
+			return -1;
+		}
 
-		return 123456789;
+		double height = (b - a) / n; // height of each trapezoid
+		double sum = 0.0;
+		double result = 0.0;
+
+		// Calculate the area of each trapezoid and sum them up
+		for (int i = 0; i < n; i++) {
+			double xi = a + i * height;
+			sum += f(xi);
+		}
+
+		sum = (height / 2.0) * (f(a) + 2.0 * sum + f(b));
+		return sum;
 
 	}
 
@@ -21,10 +34,27 @@ public class NumericalApproximation {
 	// Ensure n is even for Simpson's rule otherwise it should return -1
 
 	public static double simpsonsRule(double a, double b, int n){
+		if (n < 1 || n % 2 != 0) {
+			System.out.println("n must be greater than 0 and even");
+			return -1;
+		}
+		double height = (b - a) / n; // height of each segment
+		double sumOdd = 0.0;
+		double sumEven = 0.0;
+		double result = 0.0;
 
-		//TODO: fill me
+		for (int i = 1; i < n; i++) { // loop from 1 to n-1
+			double xi = a + i * height; // current x value
 
-		return 123456789;
+			if(i % 2 == 0) {
+				sumEven += f(xi); // even index
+			} else {
+				sumOdd += f(xi); // odd index
+			}
+		}
+
+		result = (height / 3.0) * (f(a) + 4.0 * sumOdd + 2.0 * sumEven + f(b));
+		return result;
 	}
 
 
