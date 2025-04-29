@@ -4,18 +4,18 @@ package info2;
 public class Series {
 	// Exercise Task
 	// 1.1 a)
-	public static void chessBoard(int n) {
-		for(int i = 0; i < n; i++) { // Reihen
-			for(int j = 0; j < n; j++) { // Spalte
-				if((i + j) % 2 == 0) { // gerade Summe
-					System.out.print("1 " );
-				} else { // ungerade Summe
-					System.out.print("0 ");
-				}
-			}
-			System.out.println(); // Zeilenumbruch
-		}
-	}
+public static void chessBoard(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            System.out.print(((i + j) % 2 == 0) ? "1" : "0");
+
+            if (j < n - 1) {
+                System.out.print(" ");
+            }
+        }
+        System.out.println();               // line break after each row
+    }
+}
 
 	// Exercise Task
 	// 1.2 b)
