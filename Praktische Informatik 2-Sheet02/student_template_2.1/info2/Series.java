@@ -70,23 +70,23 @@ public class Series {
 	// Exercise Task
 	// 1.5 e)
 	public static String primeFactorization(int n) {
-
-		StringBuilder result = new StringBuilder(); // Kannte die Funktion noch aus der Schule wusste keine andere möglichkeit für den output
+		String result = "";          // Zwischenergebnis
 		int i = 2;
-		while(n > 1) {
-			if(n % i == 0) { // i ist ein Teiler von n
-				result.append(i).append(", "); // Teiler zu Ergebnis hinzufügen
-				n /= i;
-			} else {
-				i++; // nächster Teiler
+		
+		while (n > 1) {
+			if (n % i == 0) {        // i teilt n
+				if (!result.isEmpty()) {
+					result += ", ";  // Trennzeichen nur, wenn schon etwas drinsteht
+				}
+				result += i;         // Faktor anhängen
+				n /= i;              // n verkleinern
+				} else {
+				i++;                 // nächster Kandidat
+				}
 			}
-		}
-		if (result.length() > 0) {
-			result.setLength(result.length() - 2); // letztes Komma und Leerzeichen entfernen
-		}
-		return result.toString();
-	}
-
+		return result;
+	}	
+	
 
 	public static void main(String[] args) {
 
