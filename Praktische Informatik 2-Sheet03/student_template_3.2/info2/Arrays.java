@@ -5,17 +5,14 @@ public class Arrays {
     // ----------------------------------------------------------------
     // Exercise 3 (a)
     // ----------------------------------------------------------------
-    //intRange: Erzeugen Sie ein int-Array, welches alle Zahlen zwischen start und end enth¨alt.
-    //Beachten Sie dabei, dass end auch kleiner als start sein kann. In diesem Fall sollte das Array die
-    //Zahlen in absteigender Reihenfolge enthalten.
     public static int[] intRange(final int start, final int end) {
         int[] array = new int[Math.abs(end - start) + 1];
         
-        for(int i = 0; i < array.length; i++) {
-            if (start < end) {
-                array[i] = start + i;
-            } else {
-                array[i] = start - i;
+        for(int i = 0; i < array.length; i++) { // Fill the array with values from start to end
+            if (start < end) { // Ascending order
+                array[i] = start + i; // Putting the values in the array
+            } else {  // Last value in the Array
+                array[i] = start - i;  
             }
         }
         return array;
@@ -24,14 +21,20 @@ public class Arrays {
     // ----------------------------------------------------------------
     // Exercise 3 (b)
     // ----------------------------------------------------------------
+    //search: Durchsuchen Sie ein gegebenes int-Array mit Hilfe einer while-Schleife nach einem
+    //Element value und geben Sie den ersten Index zuruck, an dessen Stelle ¨ value gefunden wurde.
+    //Geben Sie -1 zuruck, wenn das Array das gesuchte Element nicht enth ¨ ¨alt.
     public static int search(final int[] array, final int value) {
-        
         final int NOT_FOUND = -1;
-
+        int i = 0;
         
-        // TODO: Implement me.
+        while (i <= array.length) { // Loop through the array
+            if (array[i] == value) { // Check if the value is found
+                return i; // Return the index of the found value
+            }
+            i++; // Increment the index
+        }
 
-        
         return NOT_FOUND;
     }
 
