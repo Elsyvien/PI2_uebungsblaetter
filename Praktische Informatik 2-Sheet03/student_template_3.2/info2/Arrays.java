@@ -5,11 +5,20 @@ public class Arrays {
     // ----------------------------------------------------------------
     // Exercise 3 (a)
     // ----------------------------------------------------------------
+    //intRange: Erzeugen Sie ein int-Array, welches alle Zahlen zwischen start und end enth¨alt.
+    //Beachten Sie dabei, dass end auch kleiner als start sein kann. In diesem Fall sollte das Array die
+    //Zahlen in absteigender Reihenfolge enthalten.
     public static int[] intRange(final int start, final int end) {
+        int[] array = new int[Math.abs(end - start) + 1];
         
-        // TODO: Implement me.
-
-        return null;
+        for(int i = 0; i < array.length; i++) {
+            if (start < end) {
+                array[i] = start + i;
+            } else {
+                array[i] = start - i;
+            }
+        }
+        return array;
     }
 
     // ----------------------------------------------------------------
