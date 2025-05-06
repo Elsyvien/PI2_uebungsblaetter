@@ -28,7 +28,6 @@ public class NumericalApproximation {
 		sum = (height / 2.0) * (f(a) + 2.0 * sum + f(b));
 		return sum;
 	}
-
 	//Approximates the integral of f(x) = 1/(1+x^2) from a to b using Simpson's Rule
 	// Ensure n is even for Simpson's rule otherwise it should return -1
 
