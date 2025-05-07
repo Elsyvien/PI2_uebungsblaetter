@@ -106,11 +106,6 @@ public class Arrays {
     // ----------------------------------------------------------------
     // Exercise 3 (h)
     // ----------------------------------------------------------------
-    /*
-     * tdDev: Gegeben sei ein double-Array. Berechnen Sie die Stichproben-Standardabweichung
-σ der enthaltenen Werte durch:
-Dabei sei ¯ x der Mittelwert aus der vorherigen Aufgabe.
-     */
     public static double stdDev(final double[] array) {
         double sum = 0.0;
         if (array == null) {
@@ -129,20 +124,39 @@ Dabei sei ¯ x der Mittelwert aus der vorherigen Aufgabe.
     // Exercise 3 (i)
     // ----------------------------------------------------------------
     public static int[] append(final int[] array, int value) {
-        
-        // TODO: Implement me.
-        
-        return null;
+        if(array == null) {
+            return new int[] {value}; // If the array is null, create a new array with the value
+        }
+        int[] newArray = new int[array.length + 1]; // Create a new array with one more element
+        for(int i = 0; i < array.length; i++) {
+            newArray[i] = array[i]; // Copy the values from the old array to the new array
+        }
+        newArray[array.length] = value; // Assign the new value to the last position of the new array
+        return newArray; // Return the new array
     }       
     
     // ----------------------------------------------------------------
     // Exercise 3 (j)
     // ----------------------------------------------------------------
         public static String[] gather(final String[] dictionary, int[] indices) {
-            
-            // TODO: Implement me.
+            String[] result = new String[dictionary.length];
 
-            return null;
+            for (int i = 0; i < dictionary.length; i++) {
+                int targetIdx = indices[i];
+    
+                // Bereichs‑ und Duplikats‑Prüfung
+                if (targetIdx < 0 || targetIdx >= dictionary.length) {
+                    throw new IllegalArgumentException("Ungültiger Index in order: " + targetIdx);
+                }
+                if (result[targetIdx] != null) {
+                    throw new IllegalArgumentException(
+                            "order enthält Duplikate – Zielindex " + targetIdx + " taucht mehrfach auf");
+                }
+    
+                result[targetIdx] = dictionary[i];
+            }
+            return result;
+           
         }   
 
     // ----------------------------------------------------------------
