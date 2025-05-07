@@ -21,9 +21,6 @@ public class Arrays {
     // ----------------------------------------------------------------
     // Exercise 3 (b)
     // ----------------------------------------------------------------
-    //search: Durchsuchen Sie ein gegebenes int-Array mit Hilfe einer while-Schleife nach einem
-    //Element value und geben Sie den ersten Index zuruck, an dessen Stelle ¨ value gefunden wurde.
-    //Geben Sie -1 zuruck, wenn das Array das gesuchte Element nicht enth ¨ ¨alt.
     public static int search(final int[] array, final int value) {
         final int NOT_FOUND = -1;
         int i = 0;
@@ -41,24 +38,25 @@ public class Arrays {
     // ----------------------------------------------------------------
     // Exercise 3 (c)
     // ----------------------------------------------------------------
-    //Vertauschen Sie die Reihenfolge der Elemente eines gegebenes int-Arrays (spiegeln).
-    //Manipulieren Sie das ¨ ubergebene Array direkt.
     public static void mirror(final int[] array) {
         for(int i = 0; i < array.length / 2; i++) { // Loop through the first half of the array
             int temp = array[i]; // Store the current value in a temporary variable
             array[i] = array[array.length - 1 - i]; // Swap the values
             array[array.length - 1 - i] = temp; // Assign the temporary value to the other half
         }
-    }
+    } // Only the second half is relevant because the first half is already swapped with the second half
+    // The array is mirrored in place, so no return value is needed.
 
     
     // ----------------------------------------------------------------
     // Exercise 3 (d)
     // ----------------------------------------------------------------
     public static void rotateLeft(final String[] array) {
-        
-        // TODO: Implement me.
-
+        for(int i = 0; i < array.length - 1; i++) { // Loop through the array
+            String temp = array[i]; // Store the current value in a temporary variable
+            array[i] = array[i + 1]; // Shift the values to the left
+            array[i + 1] = temp; // Assign the temporary value to the next position
+        }
     }
     
     // ----------------------------------------------------------------
