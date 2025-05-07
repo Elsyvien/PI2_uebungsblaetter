@@ -63,43 +63,66 @@ public class Arrays {
     // Exercise 3 (e)
     // ----------------------------------------------------------------
     public static void rotateRight(final String[] array) {
-        
-        // TODO: Implement me.
-
+        for(int i = array.length - 1; i > 0; i--) { // Loop through the array
+            String temp = array[i]; // Store the current value in a temporary variable
+            array[i] = array[i - 1]; // Shift the values to the right
+            array[i - 1] = temp; // Assign the temporary value to the previous position
+        }
+       
     }
     
     // ----------------------------------------------------------------
     // Exercise 3 (f)
     // ----------------------------------------------------------------
     public static double euclideanDistance(final double[] vec1, final double[] vec2) {
+        double sum = 0.0;
 
         if ((vec1 == null) || (vec2 == null)) {
             return Double.NaN;
         }
-        
-        // TODO: Implement me.
+        for(int i = 0; i < vec1.length; i++) {
+            double diff = vec1[i] - vec2[i]; // Calculate the difference between the two vectors
+            sum += diff * diff; // Square the difference and add it to the sum
+        }
 
-        return 0.0;
+        return Math.sqrt(sum); // Return the square root of the sum
     }
     
     // ----------------------------------------------------------------
     // Exercise 3 (g)
     // ----------------------------------------------------------------
     public static double mean(final double[] array) {
+        double sum = 0.0;
+        if (array == null) {
+            return Double.NaN; // Empty Array
+        }
+        for(int i = 0; i < array.length; i++) {
+            sum += array[i]; // Sum all the values in the array
+        }
         
-        // TODO: Implement me.
-
-        return 0.0;
+        return sum / array.length; // Return the mean value
     }
    
     // ----------------------------------------------------------------
     // Exercise 3 (h)
     // ----------------------------------------------------------------
+    /*
+     * tdDev: Gegeben sei ein double-Array. Berechnen Sie die Stichproben-Standardabweichung
+σ der enthaltenen Werte durch:
+Dabei sei ¯ x der Mittelwert aus der vorherigen Aufgabe.
+     */
     public static double stdDev(final double[] array) {
-
-        // TODO: Implement me.
-        
-        return 0.0;
+        double sum = 0.0;
+        if (array == null) {
+            return Double.NaN; // Empty Array
+        }
+        double mean = mean(array); // Calcuting mean value wiht previous method
+        for(int i = 0; i < array.length; i++) {
+            double diff = array[i] - mean; // Calculate the difference between the value and the mean
+            sum += diff * diff; // Square the difference and add it to the sum
+        }
+        sum = sum / (array.length - 1); // Divide the sum by the number of values minus 1
+        return Math.sqrt(sum); // Return the square root of the sum
     }       
 
     // ----------------------------------------------------------------
