@@ -163,12 +163,13 @@ public class Arrays {
     // Exercise 3 (k)
     // ----------------------------------------------------------------
     public static int[] merge(final int[] array1, int[] array2) {
+        int[] merged;
+        int length1 = array1.length;
         
-        // TODO: Implement me.
 
-        return null;
-    }   
-
+        return merged;
+    
+    }
     // ----------------------------------------------------------------
     // Exercise 3 (l)
     // ----------------------------------------------------------------
@@ -456,7 +457,7 @@ public class Arrays {
         // ----------------------------------------------------------------
         // Exercise 2 (k)
         // ----------------------------------------------------------------
-        {
+        {   
             System.out.println("-------- Exercise 2 (k) --------");
             System.out.println();
             
