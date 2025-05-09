@@ -108,7 +108,7 @@ public class Arrays {
     // ----------------------------------------------------------------
     public static double stdDev(final double[] array) {
         double sum = 0.0;
-        if (array == null) {
+        if (array == null || array[0] == 0) {
             return 0.0; // Empty Array
         }
         double mean = mean(array); // Calcuting mean value wiht previous method
