@@ -163,11 +163,21 @@ public class Arrays {
     // Exercise 3 (k)
     // ----------------------------------------------------------------
     public static int[] merge(final int[] array1, int[] array2) {
-        int[] merged;
-        int length1 = array1.length;
-        eiuqhwieh
-                
+        if(array1 == null) return array2;
+        if(array2 == null) return array1;
+        if(array1 == null && array2 == null) return null;
 
+        int length1 = array1.length;
+        int length2 = array2.length;
+        int combinedLength = length1 + length2;
+        int[] merged = new int[combinedLength];
+
+        for(int i = 0; i < length1; i++) {
+            merged[i] = array1[i];
+        }
+        for(int i = 0; i < length2; i++) {
+            merged[length1 + i] = array2[i];
+        }
         return merged;
     
     }
@@ -176,7 +186,6 @@ public class Arrays {
     // ----------------------------------------------------------------
     public static int[] mergeInterleaved(final int[] array1, int[] array2) {
         
-        // TODO: Implement me.
 
         return null;
     }   
