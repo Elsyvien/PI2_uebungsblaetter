@@ -139,25 +139,23 @@ public class Arrays {
     // Exercise 3 (j)
     // ----------------------------------------------------------------
         public static String[] gather(final String[] dictionary, int[] indices) {
-            String[] result = new String[dictionary.length];
-
-            for (int i = 0; i < dictionary.length; i++) {
-                int targetIdx = indices[i];
+            int len = dictionary.length;
+            String[] result = new String[len];
+            boolean[] used = new boolean[len];
     
-                // Bereichs‑ und Duplikats‑Prüfung
-                if (targetIdx < 0 || targetIdx >= dictionary.length) {
-                    throw new IllegalArgumentException("Ungültiger Index in order: " + targetIdx);
+            for (int i = 0; i < len; i++) {
+                int idx = indices[i];
+                if (idx < 0 || idx >= len) {
+                    return null;
                 }
-                if (result[targetIdx] != null) {
-                    throw new IllegalArgumentException(
-                            "order enthält Duplikate – Zielindex " + targetIdx + " taucht mehrfach auf");
+                if (used[idx]) {
+                   return null; 
                 }
-    
-                result[targetIdx] = dictionary[i];
+                used[idx] = true;
+                result[i] = dictionary[idx];
             }
             return result;
-           
-        }   
+        } 
 
     // ----------------------------------------------------------------
     // Exercise 3 (k)
@@ -188,7 +186,7 @@ public class Arrays {
         if(array1 == null) return array2;
         if (array2 == null) return array1;
         if(array1 == null && array2 == null) return null;
-        
+
         int[] merged = new int[array1.length + array2.length];
         int i = 0;
         int j = 0;
