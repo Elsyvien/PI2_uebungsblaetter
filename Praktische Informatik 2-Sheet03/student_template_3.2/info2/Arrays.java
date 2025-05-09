@@ -181,7 +181,7 @@ public class Arrays {
     // Exercise 3 (l)
     // ----------------------------------------------------------------
     public static int[] mergeInterleaved(final int[] array1, int[] array2) {
-        if(array1 == null && array2 == null) return null;
+        //if(array1 == null && array2 == null) return null;
 
         int[] merged = new int[array1.length + array2.length];
         int i = 0;
