@@ -107,17 +107,20 @@ public class Arrays {
     // Exercise 3 (h)
     // ----------------------------------------------------------------
     public static double stdDev(final double[] array) {
+        if (array == null || array.length < 2) {
+            return 0.0; // Nicht genug Werte für sinnvolle Standardabweichung
+        }
+    
+        double mean = mean(array);
         double sum = 0.0;
-        if (array == null || array[0] == 0) {
-            return 0.0; // Empty Array
+    
+        for (int i = 0; i < array.length; i++) {
+            double diff = array[i] - mean;
+            sum += diff * diff;
         }
-        double mean = mean(array); // Calcuting mean value wiht previous method
-        for(int i = 0; i < array.length; i++) {
-            double diff = array[i] - mean; // Calculate the difference between the value and the mean
-            sum += diff * diff; // Square the difference and add it to the sum
-        }
-        sum = sum / (array.length - 1); // Divide the sum by the number of values minus 1
-        return Math.sqrt(sum); // Return the square root of the sum
+    
+        sum = sum / (array.length - 1); // Stichproben-Standardabweichung
+        return Math.sqrt(sum);
     }       
 
     // ----------------------------------------------------------------
