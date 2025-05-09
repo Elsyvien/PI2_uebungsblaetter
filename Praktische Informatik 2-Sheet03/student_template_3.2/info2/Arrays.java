@@ -181,20 +181,28 @@ public class Arrays {
     // Exercise 3 (l)
     // ----------------------------------------------------------------
     public static int[] mergeInterleaved(final int[] array1, int[] array2) {
-        //if(array1 == null && array2 == null) return null;
+        if (array1 == null && array2 == null) return null;
+        if (array1 == null) return java.util.Arrays.copyOf(array2, array2.length);
+        if (array2 == null) return java.util.Arrays.copyOf(array1, array1.length);
 
         int[] merged = new int[array1.length + array2.length];
-        int i = 0;
-        int j = 0;
-        int k = 0;
+        int i = 0, j = 0, k = 0;
 
-        while(i  < array1.length && j < array2.length) {
+        while (i < array1.length && j < array2.length) {
             merged[k++] = array1[i++];
             merged[k++] = array2[j++];
         }
 
-        return merged;
-    }   
+        while (i < array1.length) {
+            merged[k++] = array1[i++];
+        }
+
+        while (j < array2.length) {
+            merged[k++] = array2[j++];
+        }
+
+    return merged;
+    }
     
     // ----------------------------------------------------------------
 
