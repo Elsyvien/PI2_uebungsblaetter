@@ -109,7 +109,7 @@ public class Arrays {
     public static double stdDev(final double[] array) {
         double sum = 0.0;
         if (array == null) {
-            return Double.NaN; // Empty Array
+            return 0.0; // Empty Array
         }
         double mean = mean(array); // Calcuting mean value wiht previous method
         for(int i = 0; i < array.length; i++) {
@@ -141,17 +141,12 @@ public class Arrays {
         public static String[] gather(final String[] dictionary, int[] indices) {
             int len = dictionary.length;
             String[] result = new String[len];
-            boolean[] used = new boolean[len];
     
             for (int i = 0; i < len; i++) {
                 int idx = indices[i];
                 if (idx < 0 || idx >= len) {
                     return null;
                 }
-                if (used[idx]) {
-                   return null; 
-                }
-                used[idx] = true;
                 result[i] = dictionary[idx];
             }
             return result;
