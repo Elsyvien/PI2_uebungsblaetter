@@ -165,7 +165,8 @@ public class Arrays {
     public static int[] merge(final int[] array1, int[] array2) {
         int[] merged;
         int length1 = array1.length;
-        
+        eiuqhwieh
+                
 
         return merged;
     
