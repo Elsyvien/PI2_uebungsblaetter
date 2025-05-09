@@ -78,7 +78,7 @@ public class Arrays {
         double sum = 0.0;
 
         if ((vec1 == null) || (vec2 == null)) {
-            return Double.NaN;
+            return 0.0;
         }
         for(int i = 0; i < vec1.length; i++) {
             double diff = vec1[i] - vec2[i]; // Calculate the difference between the two vectors
@@ -94,7 +94,7 @@ public class Arrays {
     public static double mean(final double[] array) {
         double sum = 0.0;
         if (array == null) {
-            return Double.NaN; // Empty Array
+            return 0.0; // Empty Array
         }
         for(int i = 0; i < array.length; i++) {
             sum += array[i]; // Sum all the values in the array
@@ -178,8 +178,6 @@ public class Arrays {
     // Exercise 3 (l)
     // ----------------------------------------------------------------
     public static int[] mergeInterleaved(final int[] array1, int[] array2) {
-        if(array1 == null) return array2;
-        if (array2 == null) return array1;
         if(array1 == null && array2 == null) return null;
 
         int[] merged = new int[array1.length + array2.length];
