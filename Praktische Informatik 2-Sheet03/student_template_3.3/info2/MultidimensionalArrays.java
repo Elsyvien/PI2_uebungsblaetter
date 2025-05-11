@@ -54,7 +54,31 @@ public class MultidimensionalArrays {
     // ----------------------------------------------------------------
     public static int[] flatten(int[][][] array) {
         
-        // TODO: Implement me.
+        if (array == null) return new int[0];
+        int count = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) continue;
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] == null) continue;
+                count += array[i][j].length;
+            }
+        }
+        int[] result = new int[count];
+
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == null) continue;
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] == null) continue;
+                for (int k = 0; k < array[i][j].length; k++) {
+                    result[index++] = array[i][j][k];
+                }
+            }
+        }
+        
+        return result;
+    }
+
         
         return null;
     }
