@@ -29,10 +29,25 @@ public class MultidimensionalArrays {
         final int rowsB = B.length;
         final int colsB = B[0].length;
         
-        // TODO: Implement me.
+        if (A == null || B == null || rowsA == 0 || rowsB == 0 || colsA != rowsB) {
+            return null;
+        }
+
+        double[][] C = new double[rowsA][colsA];
+        for (int i = 0; i < rowsA; i++) {
+            for (int j = 0; j < colsB; j++) {
+                double sum = 0.0;
+                for (int k = 0; k < colsA; k++) {
+                    sum += A[i][k] * B[k][j];
+                }
+                C[i][j] = sum;
+            }
+        }
         
-        return null;
+        return C;
     }
+        
+        
 
     // ----------------------------------------------------------------
     // Exercise 3 (b)
