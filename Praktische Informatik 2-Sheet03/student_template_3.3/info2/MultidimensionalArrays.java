@@ -33,18 +33,19 @@ public class MultidimensionalArrays {
             return null;
         }
 
-        double[][] C = new double[rowsA][colsA];
+        double[][] multiplied = new double[rowsA][colsA];
+        
         for (int i = 0; i < rowsA; i++) {
             for (int j = 0; j < colsB; j++) {
                 double sum = 0.0;
                 for (int k = 0; k < colsA; k++) {
                     sum += A[i][k] * B[k][j];
                 }
-                C[i][j] = sum;
+                multiplied[i][j] = sum;
             }
         }
         
-        return C;
+        return multiplied;
     }
         
         
@@ -55,7 +56,9 @@ public class MultidimensionalArrays {
     public static int[] flatten(int[][][] array) {
         
         if (array == null) return new int[0];
+
         int count = 0;
+
         for (int i = 0; i < array.length; i++) {
             if (array[i] == null) continue;
             for (int j = 0; j < array[i].length; j++) {
@@ -80,9 +83,7 @@ public class MultidimensionalArrays {
     }
 
         
-        return null;
-    }
-
+       
     // ----------------------------------------------------------------
 
     public static String DELIMITER = ", ";
