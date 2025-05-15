@@ -23,7 +23,10 @@ public class XORCipher {
     // ----------------------------------------------------------------
 
     // TODO: implement valueToChar
-    
+    // Take Value from CHAR_TABLE and return the corresponding character
+    public static char valueToChar(int value) {
+        return CHAR_TABLE[value];
+    }
     
     
     // ----------------------------------------------------------------
@@ -31,7 +34,14 @@ public class XORCipher {
     // ----------------------------------------------------------------
     
     // TODO: implement charToValue
-    
+    public static int charToValue(char c) {
+        for (int i = 0; i < CHAR_TABLE.length; i++) {
+            if (CHAR_TABLE[i] == c) {
+                return i;
+            }
+        }
+        return -1; // Return -1 if character not found
+    }
     
     
     // ----------------------------------------------------------------
