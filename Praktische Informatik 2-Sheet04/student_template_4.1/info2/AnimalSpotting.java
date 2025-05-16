@@ -63,6 +63,7 @@ R¨ uckgabewert ebenfalls null erwartet. Gibt es mehrere Tiere, die in gleicher 
 vorkommen, so wird das Tier mit der niedrigsten Ordinalzahl als Ergebnis erwartet.
  */
     public static Animal mostFrequentAnimal(Animal[] zoo) {
+        Animal result = mostFrequentAnimal(zoo);
         if(zoo == null) return null;
 
         int[] counts = countAnimals(zoo);
