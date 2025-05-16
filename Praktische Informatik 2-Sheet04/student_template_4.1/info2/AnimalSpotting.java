@@ -5,16 +5,30 @@ public class AnimalSpotting {
     // ----------------------------------------------------------------
     // Exercise 1 (b)
     // ----------------------------------------------------------------
+     public static Animal[] generateRandomZoo(int n) {
+        Animal[] zoo = new Animal[n];
+        for (int i = 0; i < n; i++) {
+            int r = RandomTools.randomValue(Animal.values().length);
+            zoo[i] = Animal.values()[r];
+        }
+        return zoo;
+    }
     
-    // TODO: Implement generateRandomZoo
     
     
     
     // ----------------------------------------------------------------
     // Exercise 1 (c)
     // ----------------------------------------------------------------
+    public static void printZoo(Animal[] zoo) {
+        if (zoo == null) {
+            return;
+        }
+        for(Animal animal : zoo) {
+            System.out.println(animal);
+        }
+     }
     
-    // TODO: Implement printZoo
     
     
     
@@ -22,7 +36,18 @@ public class AnimalSpotting {
     // Exercise 1 (d)
     // ----------------------------------------------------------------
     
-    // TODO: Implement countAnimals
+    public static int[] countAnimals(Animal[] zoo){
+        int[] counts = new int[Animal.values().length];
+
+        if(zoo == null) {
+            return counts;
+        }
+
+        for(Animal animal : zoo) {
+            counts[animal.ordinal()]++;
+        }
+        return counts;
+    }
     
     
     
@@ -30,7 +55,18 @@ public class AnimalSpotting {
     // Exercise 1 (e)
     // ----------------------------------------------------------------
     
-    // TODO: Implement mostFrequentAnimal
+    public static int[] countAnimals(Animal[] zoo){
+        int[] counts = new int[Animal.values().length];
+
+        if(zoo == null) {
+            return counts;
+        }
+
+        for(Animal animal : zoo) {
+            counts[animal.ordinal()]++;
+        }
+        return counts;
+    }
 
     
 
@@ -38,7 +74,42 @@ public class AnimalSpotting {
     // Exercise 1 (f)
     // ----------------------------------------------------------------
     
-    // TODO: Implement calculateBiomass
+     public static double calculateBiomass(Animal[] zoo) {
+        if (zoo == null) {
+            return 0.0;
+        }
+        double totalebiomass = 0.0;
+        for(Animal animal : zoo) {
+            if(animal == null) {
+                continue;
+            }
+            switch(animal) {
+                case ELEPHANT:
+                    totalebiomass +=5000.0;
+                    break;
+                case LION:
+                    totalebiomass +=150.0;
+                    break;
+                case TIGER:
+                    totalebiomass +=200.0;
+                    break;
+                case WASP:
+                    totalebiomass += 6e-5;
+                    break;
+                case SNAKE:
+                    totalebiomass +=35.0;
+                    break;
+                case MONKEY:
+                    totalebiomass +=160.0;
+                    break;
+                case EMU:
+                    totalebiomass +=40.0;
+                    break;
+            }
+            }
+        return totalebiomass;
+    }
+
 
 
 
