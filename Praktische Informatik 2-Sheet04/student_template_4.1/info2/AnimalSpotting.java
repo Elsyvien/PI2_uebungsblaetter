@@ -54,20 +54,34 @@ public class AnimalSpotting {
     // ----------------------------------------------------------------
     // Exercise 1 (e)
     // ----------------------------------------------------------------
+   /*mostFrequentAnimal(zoo): Schreiben Sie nun eine statische Methode
+mostFrequentAnimal(zoo), welche ein Animal-Array erwartet und das Element der Enume-
+ration Animal zur
+¨ uckgibt, das im Array am h¨ aufigsten vorkommt. Verwenden Sie hierbei die
+bereits implementierte Methode countAnimals. Ist das ¨ ubergebene Array null, so wird als
+R¨ uckgabewert ebenfalls null erwartet. Gibt es mehrere Tiere, die in gleicher Zahl am h¨ aufigsten
+vorkommen, so wird das Tier mit der niedrigsten Ordinalzahl als Ergebnis erwartet.
+ */
     public static Animal mostFrequentAnimal(Animal[] zoo) {
-        if (zoo == null || zoo.length == 0) {
-            return null;
-        }
+        if(zoo == null) return null;
+
         int[] counts = countAnimals(zoo);
         int maxCount = 0;
         int maxIndex = -1;
+
         for (int i = 0; i < counts.length; i++) {
             if (counts[i] > maxCount) {
                 maxCount = counts[i];
                 maxIndex = i;
+            } else if (counts[i] == maxCount && maxIndex > i) {
+                maxIndex = i;
             }
         }
+        if(maxCount == 0) {
+            return null;
+        }
         return Animal.values()[maxIndex];
+            
     }
 
     // ----------------------------------------------------------------
