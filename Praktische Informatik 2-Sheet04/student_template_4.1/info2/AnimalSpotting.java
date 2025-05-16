@@ -54,21 +54,21 @@ public class AnimalSpotting {
     // ----------------------------------------------------------------
     // Exercise 1 (e)
     // ----------------------------------------------------------------
-    
-    public static int[] countAnimals(Animal[] zoo){
-        int[] counts = new int[Animal.values().length];
-
-        if(zoo == null) {
-            return counts;
+    public static Animal mostFrequentAnimal(Animal[] zoo) {
+        if (zoo == null || zoo.length == 0) {
+            return null;
         }
-
-        for(Animal animal : zoo) {
-            counts[animal.ordinal()]++;
+        int[] counts = countAnimals(zoo);
+        int maxCount = 0;
+        int maxIndex = -1;
+        for (int i = 0; i < counts.length; i++) {
+            if (counts[i] > maxCount) {
+                maxCount = counts[i];
+                maxIndex = i;
+            }
         }
-        return counts;
+        return Animal.values()[maxIndex];
     }
-
-    
 
     // ----------------------------------------------------------------
     // Exercise 1 (f)
