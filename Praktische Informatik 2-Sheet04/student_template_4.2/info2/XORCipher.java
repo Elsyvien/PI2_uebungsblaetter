@@ -61,7 +61,13 @@ public class XORCipher {
     // ----------------------------------------------------------------
     
     // TODO: implement valuesToString
-    
+    public static String valuesToString(int[] values) {
+        String result = "";
+        for(int i = 0; i < values.length; i++) {
+            result += valueToChar(i);
+        }
+        return result;
+    }
     
     
     // ----------------------------------------------------------------
@@ -69,7 +75,13 @@ public class XORCipher {
     // ----------------------------------------------------------------
 
     // TODO: implement encryptDecrypt for type int[]
-
+    public int[] encryptDecrypt(int[] values, int key) {
+        int[] result = new int[values.length];
+        for(int i = 0; i < values.length; i++) {
+            result[i] = values[i] ^ key;
+        }
+        return result;
+    }
 
     
     // ----------------------------------------------------------------
@@ -77,7 +89,17 @@ public class XORCipher {
     // ----------------------------------------------------------------
     
     // TODO: implement encryptDecryot for type String
+    public static String encryptDecrypt(String msg, String key) {
+        int[] values = stringToValue(msg);
+        int[] keyValues = stringToValue(key);
+        int[] result = new int[values.length];
         
+        for (int i = 0; i < values.length; i++) {
+            result[i] = values[i] ^ keyValues[i % keyValues.length];
+        }
+        
+        return valuesToString(result);
+    }
 
     
     
