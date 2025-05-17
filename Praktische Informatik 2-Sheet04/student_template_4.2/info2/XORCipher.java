@@ -47,7 +47,9 @@ public class XORCipher {
     // ----------------------------------------------------------------
     // Exercise 2 (c)
     // ----------------------------------------------------------------
-    public static int[] stringToValue(String str) {
+    public static int[] stringToValues(String str) {
+        if(str == null) return null;
+
         int[] values = new int [str.length()];
         for (int i = 0; i < str.length(); i++) {
             values[i] = charToValue(str.charAt(i));
@@ -62,6 +64,8 @@ public class XORCipher {
     
     // TODO: implement valuesToString
     public static String valuesToString(int[] values) {
+        if(values == null) return null;
+        
         String result = "";
         for(int i = 0; i < values.length; i++) {
             result += valueToChar(i);
