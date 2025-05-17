@@ -47,10 +47,14 @@ public class XORCipher {
     // ----------------------------------------------------------------
     // Exercise 2 (c)
     // ----------------------------------------------------------------
-    
-    // TODO: implement stringToValue
-    
-    
+    public static int[] stringToValue(String str) {
+        int[] values = new int [str.length()];
+        for (int i = 0; i < str.length(); i++) {
+            values[i] = charToValue(str.charAt(i));
+        }
+        return values;
+    }
+  
     
     // ----------------------------------------------------------------
     // Exercise 2 (d)
