@@ -63,26 +63,29 @@ R¨ uckgabewert ebenfalls null erwartet. Gibt es mehrere Tiere, die in gleicher 
 vorkommen, so wird das Tier mit der niedrigsten Ordinalzahl als Ergebnis erwartet.
  */
     public static Animal mostFrequentAnimal(Animal[] zoo) {
-        Animal result = mostFrequentAnimal(zoo);
-        if(zoo == null) return null;
+        // Treat null differently from an empty array.
+        if (zoo == null) {
+            return null;
+        }
 
+        // Count all animals (empty array → counts all zero).
         int[] counts = countAnimals(zoo);
-        int maxCount = 0;
-        int maxIndex = -1;
 
-        for (int i = 0; i < counts.length; i++) {
+        // Start with the first animal as current maximum.
+        int maxIndex = 0;
+        int maxCount = counts[0];
+
+        // Scan the remaining counts; automatically keep the smaller ordinal.
+        for (int i = 1; i < counts.length; i++) {
             if (counts[i] > maxCount) {
                 maxCount = counts[i];
                 maxIndex = i;
-            } else if (counts[i] == maxCount && maxIndex > i) {
-                maxIndex = i;
             }
         }
-        if(maxCount == 0) {
-            return null;
-        }
+
+        // If the array was empty, maxCount is 0 and maxIndex stays 0,
+        // i.e., we return the animal with the lowest ordinal.
         return Animal.values()[maxIndex];
-            
     }
 
     // ----------------------------------------------------------------
