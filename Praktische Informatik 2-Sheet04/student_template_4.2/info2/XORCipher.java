@@ -25,6 +25,9 @@ public class XORCipher {
 
     // Take Value from CHAR_TABLE and return the corresponding character
     public static char valueToChar(int value) {
+        if (value < 0 || value >= CHAR_TABLE.length) {
+            return ' ';
+        }
         return CHAR_TABLE[value];
     }
     
@@ -40,7 +43,8 @@ public class XORCipher {
                 return i;
             }
         }
-        return -1; // Return -1 if character not found
+        // Character not in table → treat like SPACE
+        return 0;
     }
     
     
@@ -48,13 +52,12 @@ public class XORCipher {
     // Exercise 2 (c)
     // ----------------------------------------------------------------
     public static int[] stringToValues(String str) {
-        if(str == null) return null;
-        new StringBuilder(str.length());
+        if (str == null) {
+            return new int[0];
+        }
         int[] values = new int[str.length()];
         for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            int value = charToValue(c);
-            values[i] = value;
+            values[i] = charToValue(str.charAt(i));
         }
         return values;
     }
@@ -66,8 +69,9 @@ public class XORCipher {
     
    
     public static String valuesToString(int[] values) {
-        if(values == null) return null;
-        
+        if (values == null) {
+            return "";
+        }
         StringBuilder sb = new StringBuilder(values.length);
         for (int v : values) {          // ←  nicht den Index, sondern den Wert nehmen!
             sb.append(valueToChar(v));
@@ -79,12 +83,14 @@ public class XORCipher {
     // ----------------------------------------------------------------
     // Exercise 2 (e)
     // ----------------------------------------------------------------
-
-  
-    public int[] encryptDecrypt(int[] values, int key) {
-        int[] result = new int[values.length];
-        for(int i = 0; i < values.length; i++) {
-            result[i] = values[i] ^ key;
+    public static int[] encryptDecrypt(int[] msg, int[] key) {
+        if (msg == null || key == null) {
+            // Requirement: return message unchanged
+            return msg;
+        }
+        int[] result = new int[msg.length];
+        for (int i = 0; i < msg.length; i++) {
+            result[i] = msg[i] ^ key[i % key.length];
         }
         return result;
     }
@@ -96,15 +102,13 @@ public class XORCipher {
     
   
     public static String encryptDecrypt(String msg, String key) {
-        int[] values = stringToValues(msg);
-        int[] keyValues = stringToValues(key);
-        int[] result = new int[values.length];
-        
-        for (int i = 0; i < values.length; i++) {
-            result[i] = values[i] ^ keyValues[i % keyValues.length];
+        if (msg == null || key == null) {
+            return msg;
         }
-        
-        return valuesToString(result);
+        int[] msgVals  = stringToValues(msg);
+        int[] keyVals  = stringToValues(key);
+        int[] cipher   = encryptDecrypt(msgVals, keyVals);
+        return valuesToString(cipher);
     }
 
     
