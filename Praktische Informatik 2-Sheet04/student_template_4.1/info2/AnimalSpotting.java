@@ -124,7 +124,7 @@ vorkommen, so wird das Tier mit der niedrigsten Ordinalzahl als Ergebnis erwarte
                     totalebiomass +=40.0;
                     break;
             }
-            }
+        }
         return totalebiomass;
     }
 
