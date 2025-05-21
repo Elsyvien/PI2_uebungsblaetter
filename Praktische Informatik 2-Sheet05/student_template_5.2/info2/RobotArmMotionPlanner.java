@@ -48,9 +48,13 @@ public class RobotArmMotionPlanner {
     // Exercise 2 (c)
     // ----------------------------------------------------------------
     public Point getControlPoint(final int i) {
-
-        // TODO: Implement me.
-        return null;
+        if (i >= 0 && i < this.pointsNum) {
+            System.out.println("Control Point has been accesed and returned: " + this.controlPoints[i].getX() + ", " + this.controlPoints[i].getY()); // Debug Message
+            return this.controlPoints[i];
+        } else {
+            System.out.println("Invalid index: " + i); // Error Case
+            return null;
+        }
     }
     
     
