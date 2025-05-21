@@ -32,10 +32,16 @@ public class RobotArmMotionPlanner {
     // ----------------------------------------------------------------
     // Exercise 2 (b)
     // ----------------------------------------------------------------
+    // Add Points to the Point array
     public void addControlPoint(final double x, final double y) {
-
-        // TODO: Implement me.
-    
+        Point point = new Point(x, y);
+        if (this.pointsNum < POINTS_MAX_NUM) {
+            this.controlPoints[this.pointsNum] = point;
+            this.pointsNum++;
+            System.out.println("Added control point: " + point.getX() + ", " + point.getY()); // Debug Message
+        } else {
+            System.out.println("Maximum number of points reached."); // Error Case
+        }
     }
     
     // ----------------------------------------------------------------
