@@ -44,7 +44,7 @@ public class RobotArmMotionPlanner {
     public Point getControlPoint(final int i) {
 
         // TODO: Implement me.
-    
+        return null;
     }
     
     
@@ -54,7 +54,7 @@ public class RobotArmMotionPlanner {
     public int performMotion() {
         
         // TODO: Implement me.
-
+        return 0;
     }
     
     
