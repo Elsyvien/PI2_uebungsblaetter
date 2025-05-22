@@ -67,7 +67,7 @@ public class RobotArmMotionPlanner {
 
         for(int i = 0; i < controlPointLength; i++) {
             this.nextPoint = i;
-            if(controller.navigateToTarget(this.controlPoints[i]) == true) {
+            if(controller.navigateToTarget(this.controlPoints[i])) {
                 count++;
                 System.out.println("Robot Arm has reached the control point: " + this.controlPoints[i].getX() + ", " + this.controlPoints[i].getY()); // Debug Message
             }
