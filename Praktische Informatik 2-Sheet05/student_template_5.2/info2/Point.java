@@ -11,6 +11,10 @@ public class Point {
         this.x = x;
         this.y = y;
     }
+    public Point(Double x, Double y) {
+        // hier wird unboxed; bei null gäbe es absichtlich eine NullPointerException (schlechtes Design aber naja)
+        this(x.doubleValue(), y.doubleValue());
+    }
     public double getX() {
         return this.x;
     }
