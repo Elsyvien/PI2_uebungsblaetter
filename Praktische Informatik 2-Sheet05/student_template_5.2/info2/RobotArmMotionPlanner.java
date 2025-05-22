@@ -62,9 +62,24 @@ public class RobotArmMotionPlanner {
     // Exercise 2 (d)
     // ----------------------------------------------------------------
     public int performMotion() {
-        
-        // TODO: Implement me.
-        return 0;
+        int count = 0;
+        int controlPointLength = this.controlPoints.length;
+
+        for(int i = 0; i < controlPointLength; i++) {
+            this.nextPoint = i;
+            if(controller.navigateToTarget(this.controlPoints[i]) == true) {
+                count++;
+                System.out.println("Robot Arm has reached the control point: " + this.controlPoints[i].getX() + ", " + this.controlPoints[i].getY()); // Debug Message
+            }
+        }
+        nextPoint = -1; // Reset nextPoint after motion
+        System.out.println("Robot Arm has reached all control points." + this.nextPoint); // Debug Message
+        pointsNum = 0; // Reset pointsNum after motion
+        for (int i = 0; i < controlPointLength; i++) {
+            this.controlPoints[i] = null; // Clear the control points
+        }
+        System.out.println("All control points have been cleared."); // Debug Message
+        return count;
     }
     
     
