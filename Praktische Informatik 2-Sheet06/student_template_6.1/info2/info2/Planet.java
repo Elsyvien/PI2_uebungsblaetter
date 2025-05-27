@@ -8,7 +8,7 @@ public class Planet extends CelestialObject {
     }
 
     public void infectWithHumans(long degree) {
-        if (degree < 0) {
+        if (degree < 0 || getDegreeOfInfection() < 0) {
             this.degreeOfInfection = 0;
             System.out.println("Infection degree cannot be negative. Resetting to 0.");
             return;
