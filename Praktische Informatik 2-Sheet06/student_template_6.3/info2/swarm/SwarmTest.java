@@ -33,7 +33,7 @@ public class SwarmTest {
     
     public static void main(String[] args) {
 
-        final int numParticles = 1000;
+        final int numParticles = 1800;
         final Random rnd = new Random(1234);
         final Swarm swarm = new Swarm(numParticles);
         
