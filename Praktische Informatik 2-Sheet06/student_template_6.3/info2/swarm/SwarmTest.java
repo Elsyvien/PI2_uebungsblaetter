@@ -38,8 +38,8 @@ public class SwarmTest {
         final Swarm swarm = new Swarm(numParticles);
         
         for (int i = 0; i < numParticles; i++) {
-            final Particle p = new RandomParticle(rnd);
-            //final Particle p = new FlockingParticle(swarm);
+            //final Particle p = new RandomParticle(rnd);
+            final Particle p = new FlockingParticle(swarm);
             
             p.getPosition().set(randomPosition(rnd));
             p.getVelocity().set(randomDirection(rnd));
