@@ -3,10 +3,21 @@ package info2.swarm;
 public class FlockingParticle extends Particle {
     private Swarm swarm;
     private double outerDist, innerDist, cohesionRate, alignmentRate, seperationRate;
+    public static final double DEFAULT_OUTER_DIST = 0.3;
+    public static final double DEFAULT_INNER_DIST = 0.20;
+    public static final double DEFAULT_COHESION_RATE = 0.25;
+    public static final double DEFAULT_ALIGNMENT_RATE = 0.25;
+    public static final double DEFAULT_SEPARATION_RATE = 0.6;
+
 
     FlockingParticle(Swarm swarm) {
         super();
         this.swarm = swarm;
+        this.outerDist = DEFAULT_OUTER_DIST;
+        this.innerDist = DEFAULT_INNER_DIST;
+        this.cohesionRate = DEFAULT_COHESION_RATE;
+        this.alignmentRate = DEFAULT_ALIGNMENT_RATE;
+        this.seperationRate = DEFAULT_SEPARATION_RATE;
     }
 
     Swarm getSwarm() {
