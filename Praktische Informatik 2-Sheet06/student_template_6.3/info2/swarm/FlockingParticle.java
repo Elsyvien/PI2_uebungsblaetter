@@ -56,4 +56,19 @@ public class FlockingParticle extends Particle {
     public void setSeperationRate(double seperationRate) {
         this.seperationRate = seperationRate;
     }
+
+    @Override
+    public Vector2d calculateParticleForce() {
+        return SwarmTools.calculateFlockingForce(
+            this,
+            this.swarm,
+            this.outerDist,
+            this.innerDist,
+            this.getMaxSpeed(),
+            this.getMaxForce(),
+            this.cohesionRate,
+            this.alignmentRate,
+            this.seperationRate
+        );
+    }
 }
