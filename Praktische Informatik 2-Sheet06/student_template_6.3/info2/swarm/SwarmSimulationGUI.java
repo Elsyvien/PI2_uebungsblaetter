@@ -134,7 +134,7 @@ public class SwarmSimulationGUI {
         // ms the actionPerformed method is invoked, which causes
         // the simulation to be rendered (painted).
         //
-        final Timer t = new Timer(1000 / 160, new ActionListener() {
+        final Timer t = new Timer(1000 / 120, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 synchronized (sim) {
