@@ -1,6 +1,4 @@
-package info2;
-
-public class Planet extends CelestialObject {
+public class Planet extends CelestialObject{
     private long degreeOfInfection;
 
     public long getDegreeOfInfection() {
@@ -8,16 +6,18 @@ public class Planet extends CelestialObject {
     }
 
     public void infectWithHumans(long degree) {
-        if (degree < 0 || degreeOfInfection > Long.MAX_VALUE - degree) {
+        if(degree < 0 || degreeOfInfection > Long.MAX_VALUE - degree) {
             this.degreeOfInfection = 0;
-            System.out.println("Infection degree cannot be negative. Resetting to 0.");
+            System.out.println("Invalid degree of infection. Resetting to 0.");
             return;
         }
         this.degreeOfInfection += degree;
     }
 
-    public void heal() {
+    public void heal{
         this.degreeOfInfection = 0;
-        System.out.println("info2.Planet healed. Infection degree reset to 0.");
+        System.out.println("Healing planet. Infection degree reset to 0.");
     }
+
+    )
 }
