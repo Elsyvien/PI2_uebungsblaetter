@@ -17,8 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import info2.pendigit.SequenceClassifier;
-import info2.pendigit.gui.PenBoardListener;
+import info2.pendigit.resources.SequenceClassifier;
 
 
 /**
