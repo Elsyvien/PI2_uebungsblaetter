@@ -7,25 +7,13 @@ import info2.ram.instruction.Instruction;
  * Adds the values at the first two addresses and stores the result
  * at the third address.
  */
-public class Add implements Instruction {
-
-    private int inAdr1;
-    private int inAdr2;
-    private int outAdr;
-    
+public class Add extends DyadicOperation {
     public Add(final int inAdr1, final int inAdr2, final int outAdr) {
-        this.inAdr1 = inAdr1;
-        this.inAdr2 = inAdr2;
-        this.outAdr = outAdr;
+        super(inAdr1, inAdr2, outAdr);
     }
 
     @Override
-    public void execute(final Ram ram) {
-        ram.write(
-            this.outAdr,
-            ram.read(this.inAdr1) + ram.read(this.inAdr2)
-        );
+    protected long evaluate(long value1, long value2) {
+        return value1 + value2;
     }
-
-        
 }
