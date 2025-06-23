@@ -239,24 +239,56 @@ public class Maze {
         final int goalSteps
     ) {
         final Maze maze = new Maze(cols, rows);
-        //
-        // MAGIC CODE BEGIN ----
-        //
-        boolean[][]_1=new boolean[rows][cols];int[][]_2=new int[rows*cols][];
-        int _3=0;int[]_4={startY,startX};_1[_4[0]][_4[1]]=true;_2[_3++]=_4;
-        int _8=0;while(_3>0){int[]_5=_2[--_3];if(_8==goalSteps){maze.goalY=_5
-        [0];maze.goalX=_5[1];}_8++;int[][]_6=new int[4][];int _7=0;if(_5[0]-1
-        >=0&&!_1[_5[0]-1][_5[1]])_6[_7++]=new int[]{_5[0]-1,_5[1]};if(_5[0]+1
-        <rows&&!_1[_5[0]+1][_5[1]])_6[_7++]=new int[]{_5[0]+1,_5[1]};if(_5[1]
-        -1>=0&&!_1[_5[0]][_5[1]-1])_6[_7++]=new int[]{_5[0],_5[1]-1};if(_5[1]
-        +1<cols&&!_1[_5[0]][_5[1]+1])_6[_7++]=new int[]{_5[0],_5[1]+1};if(_7>
-        0){_2[_3++]=_5;int r=rnd.nextInt(_7);int[]nb=_6[r];_1[nb[0]][nb[1]]=
-        true;_2[_3++]=nb;if(_5[0]==nb[0]){maze.horizontalWalls[_5[0]][Math.min
-        (_5[1],nb[1])]=false;}else{maze.verticalWalls[Math.min(_5[0], nb[0])]
-        [_5[1]]=false;}}}
-        //
-        // ---- MAGIC CODE END
-        //
+        // Deobfuscation of the "MAGIC CODE"
+        boolean[][] visited = new boolean[rows][cols];
+        int[][] stack = new int[rows * cols][];
+        int top = 0;
+        int[] startCell = { startY, startX };
+        visited[startCell[0]][startCell[1]] = true;
+        stack[top++] = startCell;
+        int steps = 0;
+
+        while (top > 0) {
+            int[] currentCell = stack[--top];
+            if (steps == goalSteps) {
+                maze.goalY = currentCell[0];
+                maze.goalX = currentCell[1];
+            }
+            steps++;
+
+            int[][] neighbors = new int[4][];
+            int neighborCount = 0;
+
+            // Nachbarn bestimmen (oben, unten, links, rechts)
+            if (currentCell[0] - 1 >= 0 && !visited[currentCell[0] - 1][currentCell[1]]) {
+                neighbors[neighborCount++] = new int[] { currentCell[0] - 1, currentCell[1] };
+            }
+            if (currentCell[0] + 1 < rows && !visited[currentCell[0] + 1][currentCell[1]]) {
+                neighbors[neighborCount++] = new int[] { currentCell[0] + 1, currentCell[1] };
+            }
+            if (currentCell[1] - 1 >= 0 && !visited[currentCell[0]][currentCell[1] - 1]) {
+                neighbors[neighborCount++] = new int[] { currentCell[0], currentCell[1] - 1 };
+            }
+            if (currentCell[1] + 1 < cols && !visited[currentCell[0]][currentCell[1] + 1]) {
+                neighbors[neighborCount++] = new int[] { currentCell[0], currentCell[1] + 1 };
+            }
+
+            // Falls es unbesuchte Nachbarn gibt, wähle per Zufall einen aus
+            if (neighborCount > 0) {
+                stack[top++] = currentCell; 
+                int r = rnd.nextInt(neighborCount);
+                int[] nextCell = neighbors[r];
+                visited[nextCell[0]][nextCell[1]] = true;
+                stack[top++] = nextCell;
+
+                // Entferne Mauer zwischen currentCell und nextCell
+                if (currentCell[0] == nextCell[0]) {
+                    maze.horizontalWalls[currentCell[0]][Math.min(currentCell[1], nextCell[1])] = false;
+                } else {
+                    maze.verticalWalls[Math.min(currentCell[0], nextCell[0])][currentCell[1]] = false;
+                }
+            }
+        }
         return maze;
     }
 }
