@@ -49,7 +49,7 @@ public class RecursiveMath {
         if (b > 0) {
             return add(a, mul(a, decr(b))); // Add a to the result of mul(a, b-1)
         } else {
-            return sub(0, mul(a, decr(-b))); // Handle negative b by decrementing -b
+            return sub(0, mul(a, sub(0, b))); // Handle negative b by decrementing -b
         }
     }
     
