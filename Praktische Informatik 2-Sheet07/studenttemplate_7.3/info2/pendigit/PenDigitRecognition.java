@@ -1,6 +1,8 @@
 package info2.pendigit;
 
 import info2.pendigit.gui.PenDigitRecognitionFrame;
+import info2.pendigit.resources.LSTMClassifier;
+import info2.pendigit.resources.SequenceClassifier;
 
 /**
  * Starting class for this exercise. It creates an instance
