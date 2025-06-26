@@ -119,9 +119,15 @@ public class IntList {
     
    
     public int find(final int value) {
-        //
-        // TODO: Implement me.
-        //
+        int index = 0;
+
+        while(this.front != null) {
+            if(this.front.value == value) {
+                return index;
+            }
+            index++;
+            this.front = this.front.next;
+        }
         return -1;
     }
     
@@ -130,10 +136,21 @@ public class IntList {
     // ----------------------------------------------------------------
     
     public int min() {
-        //
-        // TODO: Implement me.
-        //
-        return INVALID;
+        if(this.isEmpty()) {
+            return INVALID;
+        }
+
+        int currentMin = INVALID;
+        while(this.front != null) {
+            if(currentMin > this.front.value) {
+                currentMin = this.front.value;
+            }
+            if(currentMin == INVALID) {
+                currentMin = this.front.value;
+            }
+            this.front = this.front.next;
+        }
+        return currentMin;
     }
     
     // ----------------------------------------------------------------
@@ -141,10 +158,21 @@ public class IntList {
     // ----------------------------------------------------------------
     
     public int max() {
-        //
-        // TODO: Implement me.
-        //
-        return INVALID;
+        if(this.isEmpty()) {
+            return INVALID;
+        }
+
+        int currentMax = INVALID;
+        while(this.front != null) {
+            if(currentMax < this.front.value) {
+                currentMax = this.front.value;
+            }
+            if(currentMax == INVALID) {
+                currentMax = this.front.value;
+            }
+            this.front = this.front.next;
+        }
+        return currentMax;
     }
 
     // ----------------------------------------------------------------
@@ -152,10 +180,22 @@ public class IntList {
     // ----------------------------------------------------------------
 
     public int[] asArray() {
-        //
-        // TODO: Implement me.
-        //
-        return null; 
+        if (this.isEmpty()) {
+            return new int[]{};
+        }
+        int size = this.size();
+        int[] array = new int[size];
+        IntListNode ptr = this.front;
+
+        int i = 0;
+
+        while(ptr != null) {
+            array[i] = ptr.value; // Fill from the end
+            i++;
+            ptr = ptr.next;
+        }
+
+        return array;
     }    
 
     // ----------------------------------------------------------------
