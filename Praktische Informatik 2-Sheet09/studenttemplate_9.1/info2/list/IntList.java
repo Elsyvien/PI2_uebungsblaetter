@@ -203,9 +203,21 @@ public class IntList {
     // ----------------------------------------------------------------
     
     public void remove(final int i) {
-        //
-        // TODO: Implement me.
-        //
+        if(i < 0 || front == null) return;
+
+        if(i == 0){
+            this.front = this.front.next;
+            return;
+        }
+        IntListNode current = this.front;
+
+        for(int index = 0; current != null && index < i -1; index++) {
+            current = current.next;
+        }
+
+        if(current != null && current.next != null) {
+            current.next = current.next.next;
+        }
     }
     
     // ----------------------------------------------------------------
@@ -213,9 +225,15 @@ public class IntList {
     // ----------------------------------------------------------------
 
     public void reverse() {
-        //
-        // TODO: Implement me.
-        //
+        IntListNode current = this.front;
+        IntListNode ptr = null;
+        while (current != null){
+            IntListNode next = current.next;
+            current.next = ptr;
+            ptr = current;
+            current = next;
+        }
+        front = ptr;
     }
 
 
