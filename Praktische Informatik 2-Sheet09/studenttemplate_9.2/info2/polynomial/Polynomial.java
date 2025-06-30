@@ -374,6 +374,8 @@ public class Polynomial {
         if (result == null) {
             return new Polynomial(new Monomial(0, 0));
         }
+        // Sort the result to ensure correct order
+        result = result.sort();
         result = result.dropZeros();
         if (result == null) {
             return new Polynomial(new Monomial(0, 0));
