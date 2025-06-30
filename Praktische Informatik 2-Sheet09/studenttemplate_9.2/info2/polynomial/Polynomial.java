@@ -215,19 +215,12 @@ public class Polynomial {
 
     public Polynomial insertSorted(final Monomial m) {
         if (m == null) {
-            return this; // Nothing to insert.
+            return this;
         }
         if (!this.hasNext() || (m.degree > this.head.degree)) {
-            // If no next polynomial or m's degree is greater than current head's degree,
-            // insert m at the front.
             return new Polynomial(m, this);
-        } else if (m.degree < this.head.degree) {
-            // If m's degree is less than current head's degree, insert m after head.
-            return new Polynomial(this.head, this.next.insertSorted(m));
         } else {
-            // If degrees are equal, add coefficients and keep degree.
-            Monomial sum = new Monomial(m.coefficient.add(this.head.coefficient), m.degree);
-            return new Polynomial(sum, this.next);
+            return new Polynomial(this.head, this.next.insertSorted(m));
         }
     }
 
@@ -249,20 +242,33 @@ public class Polynomial {
     // ----------------------------------------------------------------
     
     public Polynomial simplify() {
-        if (!this.hasNext()) {
-            return this.dropZeros(); // If it's the last monomial, just drop zeros.
+        Polynomial sorted = this.sort();
+        Polynomial result = null;
+        Polynomial tail = null;
+        Polynomial current = sorted;
+        while (current != null) {
+            Monomial m = current.head;
+            while (current.next != null && current.next.head.degree == m.degree) {
+                m = new Monomial(m.coefficient.add(current.next.head.coefficient), m.degree);
+                current = current.next;
+            }
+            if (result == null) {
+                result = new Polynomial(m);
+                tail = result;
+            } else {
+                tail.next = new Polynomial(m);
+                tail = tail.next;
+            }
+            current = current.next;
         }
-        Polynomial simplifiedNext = this.next.simplify(); // Simplify the rest of the polynomial
-        Polynomial result = this.insertSorted(simplifiedNext.head); // Insert the head of the
-        // simplified next polynomial into the current polynomial.
-        if (simplifiedNext.hasNext()) {
-            return result.simplify(); // Recursively simplify the result.
+        if (result == null) {
+            return new Polynomial(new Monomial(0, 0));
         }
-        result = result.dropZeros(); // Drop any zeros in the result.
-        if (result == null) {   
-            return new Polynomial(new Monomial(0, 0)); // If result is empty, return zero polynomial.
+        result = result.dropZeros();
+        if (result == null) {
+            return new Polynomial(new Monomial(0, 0));
         }
-        return result; // Return the simplified polynomial.
+        return result;
     }
     
     // ----------------------------------------------------------------
@@ -275,18 +281,56 @@ public class Polynomial {
 
     public Polynomial add(final Polynomial other) {
         if (other == null) {
-            return this.copy(); // Wenn das andere Polynom null ist, wird eine Kopie des aktuellen zurückgegeben.
+            return this.copy();
         }
-
-        Polynomial result = this;
-        Polynomial current = other;
-
-        while (current != null) {
-            result = result.insertSorted(current.head);
-            current = current.next;
+        Polynomial a = this;
+        Polynomial b = other;
+        Polynomial result = null;
+        Polynomial tail = null;
+        while (a != null && b != null) {
+            Monomial m;
+            if (a.head.degree > b.head.degree) {
+                m = a.head;
+                a = a.next;
+            } else if (a.head.degree < b.head.degree) {
+                m = b.head;
+                b = b.next;
+            } else {
+                m = new Monomial(a.head.coefficient.add(b.head.coefficient), a.head.degree);
+                a = a.next;
+                b = b.next;
+            }
+            if (result == null) {
+                result = new Polynomial(m);
+                tail = result;
+            } else {
+                tail.next = new Polynomial(m);
+                tail = tail.next;
+            }
         }
-
-        return result;
+        while (a != null) {
+            Monomial m = a.head;
+            if (result == null) {
+                result = new Polynomial(m);
+                tail = result;
+            } else {
+                tail.next = new Polynomial(m);
+                tail = tail.next;
+            }
+            a = a.next;
+        }
+        while (b != null) {
+            Monomial m = b.head;
+            if (result == null) {
+                result = new Polynomial(m);
+                tail = result;
+            } else {
+                tail.next = new Polynomial(m);
+                tail = tail.next;
+            }
+            b = b.next;
+        }
+        return result == null ? new Polynomial(new Monomial(0, 0)) : result.dropZeros();
     }
     
     // ----------------------------------------------------------------
