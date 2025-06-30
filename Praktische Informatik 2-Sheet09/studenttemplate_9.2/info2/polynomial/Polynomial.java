@@ -206,7 +206,7 @@ public class Polynomial {
             // If degrees are equal, check the next monomial.
             return this.next.isSorted();
         }     
-        return false;
+        return this.next.isSorted(); // Ensure recursion continues for all cases.
     }
 
     // ----------------------------------------------------------------
@@ -215,39 +215,53 @@ public class Polynomial {
 
     public Polynomial insertSorted(final Monomial m) {
         if (m == null) {
-            return this;
+            return this.copy();
         }
-        if (!this.hasNext() || (m.degree > this.head.degree)) {
-            return new Polynomial(m, this);
-        } else {
-            return new Polynomial(this.head, this.next.insertSorted(m));
+        // Insert at front if degree is greater
+        if (m.degree > this.head.degree) {
+            return new Polynomial(m, this.copy());
         }
+        // Tail of list, append at end
+        if (this.next == null) {
+            return new Polynomial(this.head, new Polynomial(m));
+        }
+        // Insert before first node with degree less than m.degree
+        if (this.next.head.degree < m.degree) {
+            return new Polynomial(this.head, new Polynomial(m, this.next));
+        }
+        // Otherwise recurse
+        return new Polynomial(this.head, this.next.insertSorted(m));
     }
 
     // ----------------------------------------------------------------
     // Exercise 2 (c)
     // ----------------------------------------------------------------
-    
     public Polynomial sort() {
-        if (!this.hasNext()) {
-            return this.copy(); // A single monomial is already sorted.
+        // Build sorted list using insertSorted
+        Polynomial sorted = new Polynomial(this.head);
+        Polynomial current = this.next;
+
+        while (current != null) {
+            sorted = sorted.insertSorted(current.head); // assign the result
+            current = current.next;
         }
-        Polynomial sorted = this.next.sort(); // Sort the rest of the polynomial.
-        sorted = sorted.insertSorted(this.head); // Insert the current head in the sorted list.
-        return sorted; // Return the sorted polynomial.
+
+        return sorted;
     }
     
     // ----------------------------------------------------------------
     // Exercise 2 (d)
     // ----------------------------------------------------------------
-    
     public Polynomial simplify() {
+        // Sort the polynomial first
         Polynomial sorted = this.sort();
+        // Combine like terms
         Polynomial result = null;
         Polynomial tail = null;
         Polynomial current = sorted;
         while (current != null) {
             Monomial m = current.head;
+            // Sum coefficients for same degree
             while (current.next != null && current.next.head.degree == m.degree) {
                 m = new Monomial(m.coefficient.add(current.next.head.coefficient), m.degree);
                 current = current.next;
@@ -330,7 +344,11 @@ public class Polynomial {
             }
             b = b.next;
         }
-        return result == null ? new Polynomial(new Monomial(0, 0)) : result.dropZeros();
+
+        // Combine like terms and remove zeros
+        return (result == null)
+            ? new Polynomial(new Monomial(0, 0))
+            : result.sort().simplify();
     }
     
     // ----------------------------------------------------------------
