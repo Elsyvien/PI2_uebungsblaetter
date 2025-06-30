@@ -346,9 +346,11 @@ public class Polynomial {
         }
 
         // Combine like terms and remove zeros
-        return (result == null)
-            ? new Polynomial(new Monomial(0, 0))
-            : result.sort().simplify();
+        if (result == null) {
+            return new Polynomial(new Monomial(0, 0));
+        } else {
+            return result.sort().simplify();
+        }
     }
     
     // ----------------------------------------------------------------
