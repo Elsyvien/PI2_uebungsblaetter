@@ -197,9 +197,15 @@ public class Polynomial {
     // ----------------------------------------------------------------
     
     public boolean isSorted() {
-        //
-        // TODO: Implement me.
-        //        
+        if (!this.hasNext()) {
+            return true; // A single monomial is sorted by definition.
+        }
+        if (this.head.degree < this.next.head.degree) {
+            return false; // Current degree is less than next degree.
+        } else if (this.head.degree == this.next.head.degree) {
+            // If degrees are equal, check the next monomial.
+            return this.next.isSorted();
+        }     
         return false;
     }
 
@@ -208,10 +214,21 @@ public class Polynomial {
     // ----------------------------------------------------------------
 
     public Polynomial insertSorted(final Monomial m) {
-        //
-        // TODO: Implement me.
-        //        
-        return null;
+        if (m == null) {
+            return this; // Nothing to insert.
+        }
+        if (!this.hasNext() || (m.degree > this.head.degree)) {
+            // If no next polynomial or m's degree is greater than current head's degree,
+            // insert m at the front.
+            return new Polynomial(m, this);
+        } else if (m.degree < this.head.degree) {
+            // If m's degree is less than current head's degree, insert m after head.
+            return new Polynomial(this.head, this.next.insertSorted(m));
+        } else {
+            // If degrees are equal, add coefficients and keep degree.
+            Monomial sum = new Monomial(m.coefficient.add(this.head.coefficient), m.degree);
+            return new Polynomial(sum, this.next);
+        }
     }
 
     // ----------------------------------------------------------------
@@ -219,10 +236,12 @@ public class Polynomial {
     // ----------------------------------------------------------------
     
     public Polynomial sort() {
-        //
-        // TODO: Implement me.
-        //        
-        return null;
+        if (!this.hasNext()) {
+            return this.copy(); // A single monomial is already sorted.
+        }
+        Polynomial sorted = this.next.sort(); // Sort the rest of the polynomial.
+        sorted = sorted.insertSorted(this.head); // Insert the current head in the sorted list.
+        return sorted; // Return the sorted polynomial.
     }
     
     // ----------------------------------------------------------------
@@ -230,10 +249,20 @@ public class Polynomial {
     // ----------------------------------------------------------------
     
     public Polynomial simplify() {
-        //
-        // TODO: Implement me.
-        //        
-        return null;
+        if (!this.hasNext()) {
+            return this.dropZeros(); // If it's the last monomial, just drop zeros.
+        }
+        Polynomial simplifiedNext = this.next.simplify(); // Simplify the rest of the polynomial
+        Polynomial result = this.insertSorted(simplifiedNext.head); // Insert the head of the
+        // simplified next polynomial into the current polynomial.
+        if (simplifiedNext.hasNext()) {
+            return result.simplify(); // Recursively simplify the result.
+        }
+        result = result.dropZeros(); // Drop any zeros in the result.
+        if (result == null) {   
+            return new Polynomial(new Monomial(0, 0)); // If result is empty, return zero polynomial.
+        }
+        return result; // Return the simplified polynomial.
     }
     
     // ----------------------------------------------------------------
@@ -245,10 +274,19 @@ public class Polynomial {
     }
 
     public Polynomial add(final Polynomial other) {
-        //
-        // TODO: Implement me.
-        //        
-        return null;
+        if (other == null) {
+            return this.copy(); // Wenn das andere Polynom null ist, wird eine Kopie des aktuellen zurückgegeben.
+        }
+
+        Polynomial result = this;
+        Polynomial current = other;
+
+        while (current != null) {
+            result = result.insertSorted(current.head);
+            current = current.next;
+        }
+
+        return result;
     }
     
     // ----------------------------------------------------------------
@@ -256,10 +294,39 @@ public class Polynomial {
     // ----------------------------------------------------------------
     
     public Polynomial mul(final Polynomial other) {
-        //
-        // TODO: Implement me.
-        //        
-        return null;
+        if (other == null) {
+            return null; // If the other polynomial is null, return null.
+        }
+        Polynomial result = null;
+        Polynomial current = other;
+        while (current != null) {
+            Monomial m = current.head;
+            Polynomial temp = this.mulWithMonomial(m);
+            if (result == null) {
+                result = temp;
+            } else {
+                result = result.add(temp);
+            }
+            current = current.next;
+        }
+        if (result == null) {
+            return new Polynomial(new Monomial(0, 0));
+        }
+        result = result.dropZeros();
+        if (result == null) {
+            return new Polynomial(new Monomial(0, 0));
+        }
+        return result;
+    }
+
+    // Hilfsmethode: Multipliziert das Polynom mit einem Monom
+    private Polynomial mulWithMonomial(Monomial m) {
+        if (m == null) return null;
+        if (!this.hasNext()) {
+            return new Polynomial(this.head.mul(m));
+        } else {
+            return new Polynomial(this.head.mul(m), this.next.mulWithMonomial(m));
+        }
     }
     
     
