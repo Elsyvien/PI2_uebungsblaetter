@@ -120,13 +120,14 @@ public class IntList {
    
     public int find(final int value) {
         int index = 0;
+        IntListNode ptr = this.front;
 
-        while(this.front != null) {
-            if(this.front.value == value) {
+        while(ptr != null) {
+            if(ptr.value == value) {
                 return index;
             }
             index++;
-            this.front = this.front.next;
+            ptr = ptr.next;
         }
         return -1;
     }
@@ -140,15 +141,14 @@ public class IntList {
             return INVALID;
         }
 
-        int currentMin = INVALID;
-        while(this.front != null) {
-            if(currentMin > this.front.value) {
-                currentMin = this.front.value;
+        int currentMin = this.front.value;
+        IntListNode ptr = this.front.next;
+        
+        while(ptr != null) {
+            if(currentMin > ptr.value) {
+                currentMin = ptr.value;
             }
-            if(currentMin == INVALID) {
-                currentMin = this.front.value;
-            }
-            this.front = this.front.next;
+            ptr = ptr.next;
         }
         return currentMin;
     }
@@ -162,15 +162,14 @@ public class IntList {
             return INVALID;
         }
 
-        int currentMax = INVALID;
-        while(this.front != null) {
-            if(currentMax < this.front.value) {
-                currentMax = this.front.value;
+        int currentMax = this.front.value;
+        IntListNode ptr = this.front.next;
+        
+        while(ptr != null) {
+            if(currentMax < ptr.value) {
+                currentMax = ptr.value;
             }
-            if(currentMax == INVALID) {
-                currentMax = this.front.value;
-            }
-            this.front = this.front.next;
+            ptr = ptr.next;
         }
         return currentMax;
     }
