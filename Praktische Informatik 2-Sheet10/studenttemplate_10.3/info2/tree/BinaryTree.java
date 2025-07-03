@@ -74,7 +74,7 @@ public class BinaryTree<K extends Comparable<K>, V> {
     }
     private int heightHelper(BinaryTreeNode<K, V> node) {
         if (node == null)
-            return -1; // Return -1 for null nodes to count edges
+            return 0; // Return -1 for null nodes to count edges
 
         int leftHeight = heightHelper(node.left); // Recursively calculate the height of the left subtree
         int rightHeight = heightHelper(node.right); // Recursively calculate the height of the right subtree
