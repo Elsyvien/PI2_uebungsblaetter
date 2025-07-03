@@ -7,7 +7,7 @@ package info2.tree;
 
 public class BinaryIntTree {
     
-    private BinaryIntTreeNode root;
+    private BinaryTreeNode root;
     
     public BinaryIntTree() {
         this.root = null;
@@ -17,12 +17,12 @@ public class BinaryIntTree {
     // Exercise 3 (c)
     // ----------------------------------------------------------------
     
-    private BinaryIntTreeNode insertSortedHelper(
-        final BinaryIntTreeNode node,
+    private BinaryTreeNode insertSortedHelper(
+        final BinaryTreeNode node,
         final int value
     ) {
         if (node == null) {
-            return new BinaryIntTreeNode(value);
+            return new BinaryTreeNode(value);
         }
         
         if (value < node.value) {
@@ -42,7 +42,7 @@ public class BinaryIntTree {
     // Exercise 3 (d)
     // ----------------------------------------------------------------
 
-    private BinaryIntTreeNode minNode(final BinaryIntTreeNode ptr) {
+    private BinaryTreeNode minNode(final BinaryTreeNode ptr) {
         if (ptr == null) { 
             return null;
         } else if (ptr.left == null) {
@@ -52,8 +52,8 @@ public class BinaryIntTree {
         }
     }
     
-    private BinaryIntTreeNode removeSortedHelper(
-        final BinaryIntTreeNode ptr, final int value
+    private BinaryTreeNode removeSortedHelper(
+            final BinaryTreeNode ptr, final int value
     ) {
         if (ptr == null ) {
             return null;
@@ -92,10 +92,10 @@ public class BinaryIntTree {
                 // - replace current no with new node containing
                 //   right-min value.
                 //
-                final BinaryIntTreeNode minNode = minNode(ptr.right);
+                final BinaryTreeNode minNode = minNode(ptr.right);
                 final int minValue = minNode.value;
                 ptr.right = removeSortedHelper(ptr.right, minValue);
-                return new BinaryIntTreeNode(
+                return new BinaryTreeNode(
                     minValue, ptr.left, ptr.right
                 );
             }
@@ -110,7 +110,7 @@ public class BinaryIntTree {
     // Exercise 3 (e)
     // ----------------------------------------------------------------
     
-    private int heightHelper(final BinaryIntTreeNode ptr) {
+    private int heightHelper(final BinaryTreeNode ptr) {
         if (ptr == null) {
             return 0;
         }
@@ -124,12 +124,12 @@ public class BinaryIntTree {
         return this.heightHelper(this.root);
     }
     
-    private int balanceFactor(final BinaryIntTreeNode ptr) {
+    private int balanceFactor(final BinaryTreeNode ptr) {
         if (ptr == null) return 0;
         return heightHelper(ptr.right) - heightHelper(ptr.left); 
     }
     
-    private boolean isBalancedHelper(final BinaryIntTreeNode ptr) {
+    private boolean isBalancedHelper(final BinaryTreeNode ptr) {
         if (ptr == null) {
             return true;
         }
@@ -151,11 +151,11 @@ public class BinaryIntTree {
     // Exercise 3 (g)
     // ----------------------------------------------------------------
 
-    private void visit(final BinaryIntTreeNode node) {
+    private void visit(final BinaryTreeNode node) {
         System.out.println(node.value);
     }
     
-    private void traverseDepthFirstPreOrderHelper(final BinaryIntTreeNode node) {
+    private void traverseDepthFirstPreOrderHelper(final BinaryTreeNode node) {
         if (node == null) {
             return;
         }
