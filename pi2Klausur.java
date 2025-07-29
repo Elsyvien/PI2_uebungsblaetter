@@ -21,6 +21,22 @@ class pi2Klausur {
         return result;
     }
 
+    int magicSumRec(int n) {
+        int result = n;
+
+        if (n == 0) {
+            return 0; // Base case for recursion
+        }
+
+        if (n % 3 == 0) {
+            n = n / 3;
+            result += magicSumRec(n - 1);
+        } else {
+            result += magicSumRec(n - 1);
+        } 
+        return result;
+    }
+
 
     public static void main(String[] args) {
         double[][] matrix = { // Symmetric matrix
@@ -40,6 +56,7 @@ class pi2Klausur {
         for (int value : rotatedValues) {
             System.out.print(value + " ");
         }
+        System.out.println("\nMagic sum of 9: " + checker.magicSumRec(9));
 
     }
 }
