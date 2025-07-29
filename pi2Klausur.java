@@ -37,6 +37,20 @@ class pi2Klausur {
         return result;
     }
 
+    int[] maxInRowx(int[][] A) {
+        int[] maxValues = new int[A.length];
+        for (int i = 0; i < A.length; i++) {
+            int max = Integer.MIN_VALUE;
+            for (int j = 0; j < A[i].length; j++) {
+                if (A[i][j] > max) {
+                    max = A[i][j];
+                }
+            }
+            maxValues[i] = max;
+        }
+        return maxValues;
+    }
+
 
     public static void main(String[] args) {
         double[][] matrix = { // Symmetric matrix
@@ -57,6 +71,16 @@ class pi2Klausur {
             System.out.print(value + " ");
         }
         System.out.println("\nMagic sum of 9: " + checker.magicSumRec(9));
+        int[][] arr = {
+            {1, 5, 3},
+            {7, 2},
+            {-1, -2, -3}
+        };
+        int[] result = checker.maxInRowx(arr);
+        System.out.print("Max in each row: ");
+        for (int value : result) {
+            System.out.print(value + " ");
+        }
 
     }
 }
