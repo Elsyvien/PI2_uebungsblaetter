@@ -81,6 +81,5 @@ class pi2Klausur {
         for (int value : result) {
             System.out.print(value + " ");
         }
-
     }
 }
